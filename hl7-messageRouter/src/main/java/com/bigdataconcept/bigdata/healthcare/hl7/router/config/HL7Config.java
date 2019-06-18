@@ -16,7 +16,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class HL7Config 
 {
 
-	@Value("${hl7ServerLister.host:127.0.0.1}")
+	@Value("${hl7ServerLister.host:0.0.0.0}")
 	private String host;
 	
 	@Value("${hl7ServerLister.port:7060}")
@@ -27,10 +27,17 @@ public class HL7Config
 	@Value("${kafka.host:127.0.0.1:9092}")
 	private String kafkaBrokerHost;
 	
-	@Value("${kafka.port:7060}")
-	private int kafkaPort;
 	
-	@Bean
+	
+	@Value("${CORE.THREAD.POOL.SIZE:5}")
+    private int CORE_THREAD_POOL_SIZE = 5;
+    
+	
+	@Value("${MAX.THREAD.POOL.SIZE:10}")
+    private int MAX_THREAD_POOL_SIZE = 10;
+    
+    
+    @Bean
 	public HL7MLLPCodec hl7codec()
 	{
 		HL7MLLPCodec hl7MLLPCodec = new HL7MLLPCodec();
@@ -57,24 +64,6 @@ public class HL7Config
 	 
 	 
 	 
-
-	 
-
-	   @Bean(name="kafkaSender")
-	    public KafkaEndpoint kafkaEndpoint(){
-		   
-	        KafkaComponent kafkaComponent = new KafkaComponent();
-	        KafkaConfiguration kafkaConfig = new KafkaConfiguration();
-	        kafkaConfig.setBrokers(kafkaBrokerHost);
-	        kafkaConfig.setTopic("HL7_Ingest");
-	        kafkaComponent.setConfiguration(kafkaConfig);
-	        KafkaEndpoint kafkaEndpoint = new KafkaEndpoint("kafka",kafkaComponent);
-	        kafkaEndpoint.setConfiguration(kafkaConfig);
-	        
-	        return kafkaEndpoint;
-	    }
-	 
-	   
 	   
 
 		@Bean

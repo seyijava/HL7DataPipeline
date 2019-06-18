@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class KafkaProducerFactory {
 
 	
-	@Value("${hl7ServerLister.host:192.168.2.24:9092}")
+	@Value("${kafka.host:127.0.0.1:9092}")
 	private String kafkabrokerUrl;
 
 	public Producer<String, String> createNewProducer() {

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+   
+   
+    hl7MessageRouter-service:
+     container_name: hl7MessageRouter-service
+     environment:
+          -  KAFKA_HOST=192.168.2.24:9092
+          -  HL7SERVERLISTENER_PORT=7060
+          -  CORE_THREAD_POOL_SIZE=5
+          -  MAX_THREAD_POOL_SIZE=10
+          -  SERVER_HOST=0.0.0.0
+     build:
+       context: .
+       dockerfile: Dockerfile
+     image: hl7messagerouter-service:latest
+     ports:
+          - "7060:7060" 
+    
