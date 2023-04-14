@@ -20,7 +20,7 @@
 	
   
    <properties>
-        <camel.version>2.22.0</camel.version>
+        <camel.version>3.2.0</camel.version>
         <hapi.version.stable>2.2</hapi.version.stable>
     
     </properties>
